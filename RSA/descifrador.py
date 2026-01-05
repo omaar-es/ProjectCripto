@@ -1,5 +1,4 @@
 def descifrar_rsa():
-    
     archivo_priv = input("Ingresa el nombre del archivo de la llave privada: ")
     cipher_key = "cipher_key.txt"
     
@@ -14,13 +13,17 @@ def descifrar_rsa():
 
         m = pow(c, d, n)
         
+        m_hex = f"{m:X}"
+
+        with open("key.txt", "w") as f_out:
+            f_out.write(m_hex)
+
         print("-" * 30)
-        print("DESCIFRADO:")
-        print(m)
+        print(f"Descifrado guardado en: key.txt")
         print("-" * 30)
 
     except FileNotFoundError:
-        print("Error: No se encontro el archivo.")
+        print("Error: No se encontró el archivo.")
     except Exception as err:
         print(f"Error: {err}")
 
