@@ -57,7 +57,7 @@ void cargar_permutacion(const char *filename, int p[], int tamano) {
         }
     }
     fclose(f);
-    printf("Permutación cargada correctamente desde %s.\n", filename);
+    printf("Permutacion cargada \n");
 }
 
 unsigned char permutar_bits(unsigned char input_byte, int pi[8]) {
@@ -138,7 +138,7 @@ unsigned char *encipher_ctr_mode(const char *plaintext, unsigned int K, const un
     unsigned char iv = (unsigned char)(rand() % 256);
     output_block[0] = iv; // El primer byte del bloque de salida es el IV
 
-    printf("IV/Contador Inicial generado: %02X\n", iv);
+    printf("IV/Contador Inicial: %02X\n", iv);
 
     for (size_t i = 0; i < plain_len; i++) {
         unsigned char counter = iv + i; 
@@ -150,9 +150,6 @@ unsigned char *encipher_ctr_mode(const char *plaintext, unsigned int K, const un
     return output_block;
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-
 char *read_plaintext_from_file(const char *filename) {
     FILE *file = fopen(filename, "r");
     if (file == NULL) {
@@ -160,12 +157,10 @@ char *read_plaintext_from_file(const char *filename) {
         return NULL;
     }
 
-    // 1. Ir al final del archivo para determinar el tamaño
     fseek(file, 0, SEEK_END);
     long length = ftell(file);
     fseek(file, 0, SEEK_SET);
 
-    // 2. Asignar memoria para el contenido (+1 para el terminador nulo '\0')
     char *buffer = (char *)malloc(length + 1);
     if (!buffer) {
         fprintf(stderr, "Error de memoria al cargar el archivo.\n");
@@ -173,9 +168,8 @@ char *read_plaintext_from_file(const char *filename) {
         return NULL;
     }
 
-    // 3. Leer el contenido del archivo al buffer
     size_t read_size = fread(buffer, 1, length, file);
-    buffer[read_size] = '\0'; // Asegurar que termine en nulo
+    buffer[read_size] = '\0'; 
 
     fclose(file);
     return buffer;
@@ -193,12 +187,11 @@ int main() {
     
     srand(time(NULL)); 
 
-    printf("--- Programa de Cifrado (Counter Mode) ---\n");
-    printf("Ingresa el nombre del archivo de la clave (ej: key.txt): ");
+    printf("Ingresa el nombre del archivo de la clave: ");
     scanf("%99s", key_filename);
-    printf("Ingresa el nombre del archivo de la S-box (ej: sbox.txt): ");
+    printf("Ingresa el nombre del archivo de la S-box: ");
     scanf("%99s", sbox_filename);
-    printf("Ingresa el nombre del archivo de permutación (ej: permutacion.txt): ");
+    printf("Ingresa el nombre del archivo de permutacion: ");
     scanf("%99s", perm_filename);
 
     K = load_key(key_filename);
@@ -206,7 +199,7 @@ int main() {
     cargar_permutacion(perm_filename, pi_cargada, 8); 
 
     char filename[256];
-    printf("Ingresa el nombre del archivo (ej. mensaje.txt): ");
+    printf("Ingresa el nombre del archivo de texto a cifrar: ");
     scanf("%255s", filename);
 
     char *plaintext = read_plaintext_from_file(filename);

@@ -221,10 +221,9 @@ int main() {
     int *pi_inv_calculada = NULL;
     size_t ciphertext_len;
 
-    printf("--- Programa de Descifrado (Bloque 2) ---\n");
     printf("Ingresa el nombre del archivo de la clave: ");
     scanf("%99s", key_filename);
-    printf("Ingresa el nombre del archivo de la S-box inversa: ");
+    printf("Ingresa el nombre del archivo de la S-box: ");
     scanf("%99s", sbox_inv_filename);
     printf("Ingresa el nombre del archivo de la permutacion: ");
     scanf("%99s", perm_filename);

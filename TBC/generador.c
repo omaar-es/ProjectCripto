@@ -78,7 +78,7 @@ void generar_y_guardar_sboxes(const char *sbox_filename, const char *sbox_inv_fi
         fprintf(sboxFile, "%X\n", s_box[i]);
     }
     fclose(sboxFile);
-    printf("S-box generada y guardada en: %s\n", sbox_filename);
+    printf("S-box guardada en: %s\n", sbox_filename);
 
     sboxInvFile = fopen(sbox_inv_filename, "w");
     if (sboxInvFile == NULL) {
@@ -89,7 +89,7 @@ void generar_y_guardar_sboxes(const char *sbox_filename, const char *sbox_inv_fi
         fprintf(sboxInvFile, "%X\n", s_box_inv[i]);
     }
     fclose(sboxInvFile);
-    printf("S-box inversagenerada \n");
+    printf("S-box inversa generada \n");
 }
 
 int main() {
@@ -99,7 +99,6 @@ int main() {
     
     srand(time(NULL)); 
 
-    printf("--- Generador de Componentes de Cifrado ---\n");
     
     generar_y_guardar_clave("key.txt");
     

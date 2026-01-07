@@ -26,7 +26,7 @@ def cifrar_rsa():
         with open(archivo_salida, "w") as f:
             f.write(str(c))
             
-        print(f"Resultado cifrado guardado en: {archivo_salida}")
+        print(f"llave cifrada en {archivo_salida}")
 
     except FileNotFoundError:
         print(f"Error: No se encontró el archivo '{archivo_pub}' o '{archivo_llave_hex}'.")
